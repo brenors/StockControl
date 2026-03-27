@@ -1,0 +1,9 @@
+﻿using StockControl.Application.Interfaces;
+using StockControl.Domain.Entities;
+
+namespace StockControl.Application.Repositories
+{
+    public interface IOrderRepository : IRepository<Order>
+    {
+    }
+}

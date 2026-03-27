@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StockControl.Application\StockControl.Application.csproj" />
+    <ProjectReference Include="..\StockControl.Infrastructure\StockControl.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
