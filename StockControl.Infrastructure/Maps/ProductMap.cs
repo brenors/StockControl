@@ -8,7 +8,7 @@ namespace StockControl.Infrastructure.Maps
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            bbuilder.HasKey(x => x.Id);
+            builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Name)
                 .IsRequired()

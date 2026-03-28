@@ -5,56 +5,50 @@ namespace StockControl.Infrastructure.Data
 {
     public static class DbInitializer
     {
-        public static async Task SeedAsync(AppDbContext context)
+        public static ModelBuilder UseDataSeed(this ModelBuilder builder)
         {
-            await context.Database.MigrateAsync();
 
-            // Se já tiver dados, não faz nada
-            if (context.Users.Any())
-                return;
+            builder.Entity<User>().HasData(
+                new User
+                {
+                    Id = new Guid("11111111-1111-1111-1111-111111111111"),
+                    Name = "Admin",
+                    Email = "admin@admin.com",
+                    PasswordHash = "123456",
+                    Role = UserRole.Admin,
+                    CreatedAt = new DateTime(2026, 1, 1)
+                },
+                new User
+                {
+                    Id = new Guid("11111111-1111-1111-1111-111111111113"),
+                    Name = "Seller",
+                    Email = "seller@admin.com",
+                    PasswordHash = "123456",
+                    Role = UserRole.Seller,
+                    CreatedAt = new DateTime(2026, 1, 1)
+                }
+            );
 
-            var users = new List<User>
-        {
-            new User
-            {
-                Name = "Admin",
-                Email = "admin@admin.com",
-                PasswordHash = "123456",
-                Role = UserRole.Admin,
-                CreatedAt = DateTime.UtcNow
-            },
-            new User
-            {
-                Name = "Seller",
-                Email = "seller@admin.com",
-                PasswordHash = "123456",
-                Role = UserRole.Seller,
-                CreatedAt = DateTime.UtcNow
-            }
-        };
+            builder.Entity<Product>().HasData(
+                new Product
+                {
+                    Id = new Guid("11111111-1111-1111-1111-111111111112"),
+                    Name = "Produto Teste 1",
+                    Description = "Descrição teste",
+                    Price = 100,
+                    CreatedAt = new DateTime(2026, 1, 1)
+                },
+                 new Product
+                 {
+                     Id = new Guid("11111111-1111-1111-1111-111111111114"),
+                     Name = "Produto Teste 2",
+                     Description = "Outro produto",
+                     Price = 200,
+                     CreatedAt = new DateTime(2026, 1, 1)
+                 }
+            );
 
-            var products = new List<Product>
-        {
-            new Product
-            {
-                Name = "Produto Teste 1",
-                Description = "Descrição teste",
-                Price = 100,
-                CreatedAt = DateTime.UtcNow
-            },
-            new Product
-            {
-                Name = "Produto Teste 2",
-                Description = "Outro produto",
-                Price = 200,
-                CreatedAt = DateTime.UtcNow
-            }
-        };
-
-            await context.Users.AddRangeAsync(users);
-            await context.Products.AddRangeAsync(products);
-
-            await context.SaveChangesAsync();
+            return builder;
         }
     }
 }

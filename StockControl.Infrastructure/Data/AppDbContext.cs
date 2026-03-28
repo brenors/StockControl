@@ -8,7 +8,6 @@ namespace StockControl.Infrastructure.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
-
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Stock> Stocks { get; set; }
@@ -17,8 +16,20 @@ namespace StockControl.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.UseDataSeed();
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                var connectionString = Environment.GetEnvironmentVariable("DefaultConnection");
+                optionsBuilder.UseSqlServer(connectionString);
+
+                base.OnConfiguring(optionsBuilder);
+            }
         }
     }
 }

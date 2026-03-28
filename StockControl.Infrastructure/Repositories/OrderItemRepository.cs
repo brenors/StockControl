@@ -1,5 +1,4 @@
-﻿using StockControl.Application.Repositories;
-using StockControl.Domain.Entities;
+﻿using StockControl.Domain.Entities;
 using StockControl.Infrastructure.Data;
 
 namespace StockControl.Infrastructure.Repositories

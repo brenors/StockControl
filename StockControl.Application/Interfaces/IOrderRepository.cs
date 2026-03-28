@@ -1,7 +1,7 @@
 ﻿using StockControl.Application.Interfaces;
 using StockControl.Domain.Entities;
 
-namespace StockControl.Application.Repositories
+namespace StockControl.Infrastructure.Repositories
 {
     public interface IOrderRepository : IRepository<Order>
     {

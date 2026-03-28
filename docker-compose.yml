@@ -5,7 +5,7 @@ services:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: stockcontrol-sql
     environment:
-      SA_PASSWORD: "Password@123!"
+      SA_PASSWORD: "Senha@123!"
       ACCEPT_EULA: "Y"
     ports:
       - "127.0.0.1:1433:1433"
