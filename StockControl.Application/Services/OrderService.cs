@@ -75,5 +75,11 @@ namespace StockControl.Application.Services
 
             return _mapper.Map<OrderResponse>(order);
         }
+
+        public async Task<List<OrderResponse>> Filter(string? customerDocument, string? sellerName)
+        {
+            var orders = await _orderRepository.FilterAsync(customerDocument, sellerName);
+            return _mapper.Map<List<OrderResponse>>(orders);
+        }
     }
 }

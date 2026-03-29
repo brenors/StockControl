@@ -23,5 +23,15 @@ namespace StockControl.API.Controllers
             var result = await _service.Create(request);
             return Ok(result);
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Filter(
+            [FromQuery] string? customerDocument,
+            [FromQuery] string? sellerName)
+        {
+            var result = await _service.Filter(customerDocument, sellerName);
+            return Ok(result);
+        }
     }
 }
