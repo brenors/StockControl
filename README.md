@@ -24,6 +24,7 @@ Tecnologias utilizadas:
 
 
 Modelagem do banco de dados
+
 <img width="723" height="737" alt="image" src="https://github.com/user-attachments/assets/da8d5840-3459-40df-934a-d9d54b669d1b" />
 
 
