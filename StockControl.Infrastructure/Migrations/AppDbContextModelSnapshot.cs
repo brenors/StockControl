@@ -137,19 +137,46 @@ namespace StockControl.Infrastructure.Migrations
                         {
                             Id = new Guid("11111111-1111-1111-1111-111111111112"),
                             CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Descrição teste",
+                            Description = "Bola oficial tamanho 5",
                             IsDeleted = false,
-                            Name = "Produto Teste 1",
-                            Price = 100m
+                            Name = "Bola de Futebol",
+                            Price = 120m
                         },
                         new
                         {
                             Id = new Guid("11111111-1111-1111-1111-111111111114"),
                             CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Outro produto",
+                            Description = "Chuteira para campo profissional",
                             IsDeleted = false,
-                            Name = "Produto Teste 2",
-                            Price = 200m
+                            Name = "Chuteira Nike",
+                            Price = 350m
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111115"),
+                            CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Camiseta dry-fit para treino",
+                            IsDeleted = false,
+                            Name = "Camiseta Esportiva",
+                            Price = 80m
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111116"),
+                            CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Luva profissional com alta aderência",
+                            IsDeleted = false,
+                            Name = "Luva de Goleiro",
+                            Price = 150m
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111117"),
+                            CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Caneleira leve para proteção",
+                            IsDeleted = false,
+                            Name = "Caneleira",
+                            Price = 60m
                         });
                 });
 
@@ -242,7 +269,7 @@ namespace StockControl.Infrastructure.Migrations
                             Email = "admin@admin.com",
                             IsDeleted = false,
                             Name = "Admin",
-                            PasswordHash = "123456",
+                            PasswordHash = "$2a$12$vNDPN.V8E8Gtmt.ZGk7SNebq0NN/7SBdPs5rkqx/5EBm7pD.BJro2",
                             Role = "Admin"
                         },
                         new
@@ -252,7 +279,7 @@ namespace StockControl.Infrastructure.Migrations
                             Email = "seller@admin.com",
                             IsDeleted = false,
                             Name = "Seller",
-                            PasswordHash = "123456",
+                            PasswordHash = "$2a$12$vNDPN.V8E8Gtmt.ZGk7SNebq0NN/7SBdPs5rkqx/5EBm7pD.BJro2",
                             Role = "Seller"
                         });
                 });

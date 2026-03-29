@@ -5,5 +5,6 @@ namespace StockControl.Infrastructure.Repositories
 {
     public interface IOrderRepository : IRepository<Order>
     {
+        Task AddOrderWithItemsAsync(Order order);
     }
 }

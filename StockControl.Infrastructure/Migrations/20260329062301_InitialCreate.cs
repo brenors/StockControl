@@ -128,8 +128,11 @@ namespace StockControl.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedAt", "DeletedAt", "Description", "IsDeleted", "Name", "Price", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { new Guid("11111111-1111-1111-1111-111111111112"), new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Descrição teste", false, "Produto Teste 1", 100m, null },
-                    { new Guid("11111111-1111-1111-1111-111111111114"), new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Outro produto", false, "Produto Teste 2", 200m, null }
+                    { new Guid("11111111-1111-1111-1111-111111111112"), new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Bola oficial tamanho 5", false, "Bola de Futebol", 120m, null },
+                    { new Guid("11111111-1111-1111-1111-111111111114"), new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Chuteira para campo profissional", false, "Chuteira Nike", 350m, null },
+                    { new Guid("11111111-1111-1111-1111-111111111115"), new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Camiseta dry-fit para treino", false, "Camiseta Esportiva", 80m, null },
+                    { new Guid("11111111-1111-1111-1111-111111111116"), new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Luva profissional com alta aderência", false, "Luva de Goleiro", 150m, null },
+                    { new Guid("11111111-1111-1111-1111-111111111117"), new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Caneleira leve para proteção", false, "Caneleira", 60m, null }
                 });
 
             migrationBuilder.InsertData(
@@ -137,8 +140,8 @@ namespace StockControl.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedAt", "DeletedAt", "Email", "IsDeleted", "Name", "PasswordHash", "Role", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { new Guid("11111111-1111-1111-1111-111111111111"), new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "admin@admin.com", false, "Admin", "123456", "Admin", null },
-                    { new Guid("11111111-1111-1111-1111-111111111113"), new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "seller@admin.com", false, "Seller", "123456", "Seller", null }
+                    { new Guid("11111111-1111-1111-1111-111111111111"), new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "admin@admin.com", false, "Admin", "$2a$12$vNDPN.V8E8Gtmt.ZGk7SNebq0NN/7SBdPs5rkqx/5EBm7pD.BJro2", "Admin", null },
+                    { new Guid("11111111-1111-1111-1111-111111111113"), new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "seller@admin.com", false, "Seller", "$2a$12$vNDPN.V8E8Gtmt.ZGk7SNebq0NN/7SBdPs5rkqx/5EBm7pD.BJro2", "Seller", null }
                 });
 
             migrationBuilder.CreateIndex(

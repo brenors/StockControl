@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using StockControl.Application.DTOs.Auth;
 using StockControl.Application.Interfaces;
@@ -14,11 +15,13 @@ namespace StockControl.Application.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IConfiguration _configuration;
+        private readonly IMapper _mapper;
 
-        public AuthService(IUserRepository userRepository, IConfiguration configuration)
+        public AuthService(IUserRepository userRepository, IConfiguration configuration, IMapper mapper)
         {
             _userRepository = userRepository;
             _configuration = configuration;
+            _mapper = mapper;
         }
 
         public async Task<AuthResponse> Register(RegisterRequest request)
@@ -29,27 +32,33 @@ namespace StockControl.Application.Services
                 .Assert(request.Name.IsNotNullOrWhiteSpace(), "Name is required")
                 .Assert(request.Email.IsValidEmail(), "Invalid email format")
                 .Assert(request.Password.IsNotNullOrWhiteSpace(), "Password is required")
-                .Assert(request.Password.IsLongerThan(11), "Password must be at least 12 characters")
+                .Assert(request.Password.IsLongerThan(5), "Password must be at least 6 characters")
+                .Assert(request.Role.IsNotNullOrWhiteSpace(), "Role is required")
                 .Validate();
+
+            var roleParsed = Enum.TryParse<UserRole>(request.Role, true, out var role);
+            DomainValidator.Assert(roleParsed, $"Invalid role: {request.Role}");
 
             var existingUser = await _userRepository.GetByEmailAsync(request.Email);
 
-            DomainValidator.Assert(existingUser is null, "User already exists");
+            DomainValidator.Assert(existingUser is null, "Email already in use");
 
             var user = new User
             {
                 Name = request.Name,
                 Email = request.Email,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password),
-                Role = UserRole.Seller,
+                Role = Enum.Parse<UserRole>(request.Role),
                 CreatedAt = DateTime.UtcNow
             };
 
             await _userRepository.AddAsync(user);
+            await _userRepository.SaveChangesAsync();
 
+            var token = GenerateToken(user);
             return new AuthResponse
             {
-                Token = GenerateToken(user)
+                Token = token
             };
         }
 
@@ -69,9 +78,10 @@ namespace StockControl.Application.Services
             var isValidPassword = BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash);
             DomainValidator.Assert(isValidPassword, "Invalid credentials");
 
+            var token = GenerateToken(user);
             return new AuthResponse
             {
-                Token = GenerateToken(user)
+                Token = token
             };
         }
 

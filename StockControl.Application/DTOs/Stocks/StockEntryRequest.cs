@@ -1,10 +1,8 @@
-﻿namespace StockControl.Domain.Entities
+﻿namespace StockControl.Application.DTOs.Stocks
 {
-    public class Stock : BaseEntity
+    public class StockEntryRequest
     {
         public Guid ProductId { get; set; }
-        public Product Product { get; set; }
-
         public int Quantity { get; set; }
         public string? InvoiceNumber { get; set; }
     }

@@ -8,5 +8,11 @@ namespace StockControl.Infrastructure.Repositories
         public OrderRepository(AppDbContext context) : base(context)
         {
         }
+
+        public async Task AddOrderWithItemsAsync(Order order)
+        {
+            await _context.Orders.AddAsync(order);
+            await _context.SaveChangesAsync();
+        }
     }
 }
