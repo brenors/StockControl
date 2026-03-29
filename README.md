@@ -27,12 +27,11 @@ Arquitetura
 
 O projeto segue o padrão Clean Architecture, dividido em camadas:
 
-src
-StockControl.API            → Controllers, Middlewares, Configuração
-StockControl.Application    → Serviços, DTOs, Regras de negócio
-StockControl.Domain         → Entidades, Enums, Validações
+StockControl.API → Controllers, Middlewares, Configuração
+StockControl.Application → Serviços, DTOs, Regras de negócio
+StockControl.Domain → Entidades, Enums, Validações
 StockControl.Infrastructure → Repositórios, DbContext, Migrations
-StockControl.Tests          → Testes unitários
+StockControl.Tests → Testes unitários
 
  
 Princípios aplicados:
@@ -89,6 +88,7 @@ dotnet run
 
 **5. Acessar Swagger**
 https://localhost:{porta}/swagger -> a porta é mostrada no terminal ao rodar o probjeto
+
 
 Autenticação
 
@@ -191,11 +191,13 @@ Executar testes:
 cd tests/StockControl.Tests
 dotnet test
 
+
 **Cobertura de testes**
 AuthService
 ProductService
 StockService
 OrderService
+
 
 Observabilidade (Tracing/APM)
 
@@ -207,6 +209,7 @@ A aplicação utiliza OpenTelemetry para monitoramento:
 
 Configurado em: StockControl.API
 
+
 **Regras de negócio implementadas:**
 Usuário com role (Admin ou Seller)
 Apenas Admin pode:
@@ -215,6 +218,7 @@ Apenas Admin pode:
 - Pedido só é criado com estoque disponível
 - Baixa automática de estoque
 - Registro de entrada de estoque com nota fiscal
+
   
 Considerações técnicas
 - Persistência feita com EF Core
@@ -222,6 +226,7 @@ Considerações técnicas
 - Separação clara entre camadas
 - Mapeamento com AutoMapper
 - Validações centralizadas
+
 
 Conclusão
 
