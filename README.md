@@ -21,7 +21,7 @@ Tecnologias utilizadas:
 - OpenTelemetry (Tracing/APM)
 
 
-<h3>Arquitetura<h3>
+Arquitetura
 
 O projeto segue o padrão Clean Architecture, dividido em camadas:
 
@@ -32,6 +32,7 @@ src/
  └── StockControl.Infrastructure → Repositórios, DbContext, Migrations
 tests/
  └── StockControl.Tests          → Testes unitários
+
  
 Princípios aplicados:
 - Separação de responsabilidades
@@ -42,28 +43,28 @@ Princípios aplicados:
 
   
 Pacotes por projeto:
-StockControl.API
+**StockControl.API**
 - Microsoft.AspNetCore.Authentication.JwtBearer
 - Swashbuckle.AspNetCore
 - OpenTelemetry.Extensions.Hosting
 - OpenTelemetry.Instrumentation.AspNetCore
 - OpenTelemetry.Exporter.Console
   
-StockControl.Application
+**StockControl.Application**
 - AutoMapper
 - StockControl.Infrastructure
 - Microsoft.EntityFrameworkCore
 - Microsoft.EntityFrameworkCore.SqlServer
 - Microsoft.EntityFrameworkCore.Design
 
-StockControl.Tests
+**StockControl.Tests**
 - xUnit
 - Moq
 - FluentAssertions
 
   
 Como rodar o projeto
-1. Subir banco de dados (Docker)
+**1. Subir banco de dados (Docker)**
 
 Na raiz do projeto:
 
@@ -71,35 +72,36 @@ docker-compose up -d
 
 Isso irá subir um container com SQL Server.
 
-2. Criar migration (caso necessário)
+**2. Criar migration (caso necessário)**
 
 A partir da raiz do projeto:
 
 cd src
-dotnet ef migrations add InitialCreate \
---project StockControl.Infrastructure \
---startup-project StockControl.API
-3. Aplicar migration no banco
-dotnet ef database update \
---project StockControl.Infrastructure \
---startup-project StockControl.API
-4. Rodar a API
+dotnet ef migrations add InitialCreate --project StockControl.Infrastructure --startup-project StockControl.API
+
+**3. Aplicar migration no banco**
+dotnet ef database update --project StockControl.Infrastructure --startup-project StockControl.API
+
+**4. Rodar a API**
 cd src/StockControl.API
 dotnet run
-5. Acessar Swagger
-https://localhost:{porta}/swagger
-🔐 Autenticação
+
+**5. Acessar Swagger**
+https://localhost:{porta}/swagger -> a porta é mostrada no terminal ao rodar o probjeto
+
+Autenticação
 
 A API utiliza autenticação via JWT.
 
 Como utilizar no Swagger:
-Faça login
-Copie o token retornado
-Clique em Authorize
-Insira:
-Bearer {seu_token}
-🧪 Fluxo completo da aplicação (passo a passo)
-🔹 1. Cadastro de usuário
+1. Faça login
+2. Copie o token retornado
+3. Clique em Authorize
+4. Insira:
+{seu_token} -> o token poder ser inserido diretamente do campo, o swagger já está configurado para usar Bearer automaticamente
+
+Fluxo completo da aplicação (passo a passo)
+**1. Cadastro de usuário**
 
 POST /api/auth/register
 
@@ -110,12 +112,13 @@ POST /api/auth/register
   "role": "Admin"
 }
 
-📌 Regras:
+Regras:
 
 Email deve ser único
 Senha mínima de 6 caracteres
 Role: Admin ou Seller
-🔹 2. Login
+
+**2. Login**
 
 POST /api/auth/login
 
@@ -124,10 +127,9 @@ POST /api/auth/login
   "password": "123456"
 }
 
-📌 Retorno:
+Retorno: Token JWT
 
-Token JWT
-🔹 3. Criar produto (Admin)
+**3. Criar produto (Admin)**
 
 POST /api/products
 
@@ -136,11 +138,12 @@ POST /api/products
   "description": "Bola profissional",
   "price": 150
 }
-🔹 4. Listar e filtrar produtos
+
+**4. Listar e filtrar produtos**
 
 GET /api/products?name=bola&minPrice=100&maxPrice=200
 
-🔹 5. Adicionar estoque (Admin)
+**5. Adicionar estoque (Admin)**
 
 POST /api/stocks
 
@@ -150,15 +153,16 @@ POST /api/stocks
   "invoiceNumber": "NF-123"
 }
 
-📌 Regras:
+Regras:
 
 Produto deve existir
 Nota fiscal obrigatória
-🔹 6. Consultar estoque disponível
+
+**6. Consultar estoque disponível**
 
 GET /api/stocks/{productId}/available
 
-🔹 7. Criar pedido (Seller)
+**7. Criar pedido (Seller)**
 
 POST /api/orders
 
@@ -172,60 +176,57 @@ POST /api/orders
     }]
 }
 
-📌 Regras:
+Regras:
 
-Produto deve existir
-Deve haver estoque suficiente
-Caso contrário → erro
-Estoque é reduzido automaticamente
-🧪 Testes unitários
+- Produto deve existir
+- Deve haver estoque suficiente
+- Caso contrário → erro
+- Estoque é reduzido automaticamente
+  
+Testes unitários
 
 Executar testes:
 
 cd tests/StockControl.Tests
 dotnet test
-✔ Cobertura de testes
+
+**Cobertura de testes**
 AuthService
 ProductService
 StockService
 OrderService
-📊 Observabilidade (Tracing/APM)
+
+Observabilidade (Tracing/APM)
 
 A aplicação utiliza OpenTelemetry para monitoramento:
 
-Requisições HTTP
-Tempo de execução
-Logs no console
+- Requisições HTTP
+- Tempo de execução
+- Logs no console
 
-📌 Configurado em:
+Configurado em: StockControl.API
 
-StockControl.API
-⚠️ Regras de negócio implementadas
+**Regras de negócio implementadas:**
 Usuário com role (Admin ou Seller)
 Apenas Admin pode:
-Criar produtos
-Gerenciar estoque
-Pedido só é criado com estoque disponível
-Baixa automática de estoque
-Registro de entrada de estoque com nota fiscal
-💎 Diferenciais implementados
-Clean Architecture
-JWT Authentication com Roles
-Testes unitários
-Swagger com autenticação
-OpenTelemetry (Tracing)
-Docker para banco de dados
-📌 Considerações técnicas
-Persistência feita com EF Core
-Padrão Repository aplicado
-Separação clara entre camadas
-Mapeamento com AutoMapper
-Validações centralizadas
-🏁 Conclusão
+- Criar produtos
+- Gerenciar estoque
+- Pedido só é criado com estoque disponível
+- Baixa automática de estoque
+- Registro de entrada de estoque com nota fiscal
+  
+Considerações técnicas
+- Persistência feita com EF Core
+- Padrão Repository aplicado
+- Separação clara entre camadas
+- Mapeamento com AutoMapper
+- Validações centralizadas
+
+Conclusão
 
 O projeto foi desenvolvido visando:
 
-Simular ambiente real de produção
-Garantir organização e escalabilidade
-Facilitar manutenção e testes
-Aplicar boas práticas de engenharia de software
+- Simular ambiente real de produção
+- Garantir organização e escalabilidade
+- Facilitar manutenção e testes
+- Aplicar boas práticas de engenharia de software
