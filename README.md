@@ -3,12 +3,14 @@ StockControl API
 API desenvolvida em .NET para controle de estoque e gerenciamento de produtos e pedidos, seguindo os princípios de Clean Architecture.
 Este projeto foi construído com foco em boas práticas de engenharia de software, organização de código, testabilidade e simulação de um ambiente real de produção.
 
+
 A aplicação permite:
 
-Cadastro e autenticação de usuários
-Gerenciamento de produtos
-Controle de estoque com rastreabilidade (nota fiscal)
-Emissão de pedidos com validação de estoque
+- Cadastro e autenticação de usuários
+- Gerenciamento de produtos
+- Controle de estoque com rastreabilidade (nota fiscal)
+- Emissão de pedidos com validação de estoque
+
 
 Tecnologias utilizadas:
 - .NET 9
@@ -25,13 +27,12 @@ Arquitetura
 
 O projeto segue o padrão Clean Architecture, dividido em camadas:
 
-src/
- ├── StockControl.API            → Controllers, Middlewares, Configuração
- ├── StockControl.Application    → Serviços, DTOs, Regras de negócio
- ├── StockControl.Domain         → Entidades, Enums, Validações
- └── StockControl.Infrastructure → Repositórios, DbContext, Migrations
-tests/
- └── StockControl.Tests          → Testes unitários
+src
+StockControl.API            → Controllers, Middlewares, Configuração
+StockControl.Application    → Serviços, DTOs, Regras de negócio
+StockControl.Domain         → Entidades, Enums, Validações
+StockControl.Infrastructure → Repositórios, DbContext, Migrations
+StockControl.Tests          → Testes unitários
 
  
 Princípios aplicados:
